@@ -9,14 +9,14 @@ CREATE TABLE department (
 );
 
 CREATE TABLE role (
-    id INT(12) NOT NULL PRIMARY KEY,
+    id INT(12) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(30),
     salary DECIMAL,
     department_id INT(12)
 );
 
 CREATE TABLE employee (
-    id INT(12) NOT NULL PRIMARY KEY,
+    id INT(12) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(30),
     last_name VARCHAR(30),
     role_id INT,
