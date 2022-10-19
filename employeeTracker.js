@@ -52,8 +52,6 @@ function employeeTracker() {
                 'Add Role',
                 'View All Departments',
                 'Add Department',
-                'View All Employees by Department',
-                'View All Employees by Role',
                 'Quit'
                 ]
         }
