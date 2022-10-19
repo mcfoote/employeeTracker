@@ -18,6 +18,7 @@ connection.connect(function(err) {
 
     console.log('Successfully Connected as ' + connection.threadId);
 
+    console.log('_________________________________________________')
     console.log('  ______                 _                       ');
     console.log(' |  ____|               | |                      ');
     console.log(' | |__   _ __ ___  _ __ | | ___  _   _  ___  ___ '); 
@@ -30,14 +31,69 @@ connection.connect(function(err) {
     console.log(' | |  | | (_| | | | | (_| | (_| |  __/ |         '); 
     console.log(' |_|  |_|\__,_|_| |_|\__,_|\__, |\___|_|         '); 
     console.log('                            __/ |                '); 
-    console.log('                           |___/                 '); 
+    console.log('                           |___/                 ');
+    console.log('_________________________________________________')
     
     employeeTracker();
 
 })
 
 function employeeTracker() {
+    inquirer.prompt([
+        {
+        type: 'list',
+        message: 'What would you like to do?',
+        name: 'action',
+        choices: [
+                'View All Employees', 
+                'Add Employee',
+                'Update Employee Role',
+                'View All Roles',
+                'Add Role',
+                'View All Departments',
+                'Add Department',
+                'View All Employees by Department',
+                'View All Employees by Role',
+                'Quit'
+                ]
+        }
+    ]).then(function(answers) {
+            switch (answers.action) {
+    
+                case 'View All Employees':
+                    viewEmployees();
+                break;
 
+                case 'Add Employee':
+                    addEmployee();
+                break;
+
+                case 'Update Employee Role':
+                    updateEmployeeRole();
+                break;
+
+                case 'View All Roles':
+                    viewRoles();
+                break;
+
+                case 'Add Role':
+                    addRole();
+                break;
+    
+                case 'View All Departments':
+                    viewDepartments();
+                break;
+    
+                case 'Add Department':
+                    addDepartment();
+                break;
+    
+                case 'Quit':
+                    console.log ('Thank you for using the employee manager CLI');
+                    connection.end();
+                break;
+                }
+        })
 };
 
 function addDepartment() {
@@ -52,7 +108,7 @@ function addEmployee() {
 
 };
 
-function viewDeparmtents() {
+function viewDepartments() {
 
 };
 
