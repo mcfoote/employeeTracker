@@ -18,7 +18,7 @@ connection.connect(function(err) {
 
     console.log('Successfully Connected as ' + connection.threadId);
 
-    console.log('_________________________________________________')
+    console.log('_________________________________________________');
     console.log('  ______                 _                       ');
     console.log(' |  ____|               | |                      ');
     console.log(' | |__   _ __ ___  _ __ | | ___  _   _  ___  ___ '); 
@@ -32,7 +32,7 @@ connection.connect(function(err) {
     console.log(' |_|  |_|\__,_|_| |_|\__,_|\__, |\___|_|         '); 
     console.log('                            __/ |                '); 
     console.log('                           |___/                 ');
-    console.log('_________________________________________________')
+    console.log('_________________________________________________');
     
     employeeTracker();
 
