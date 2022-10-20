@@ -99,14 +99,14 @@ function addDepartment() {
     inquirer.prompt([
 
         {
-          name: "name",
-          type: "input",
-          message: "Input the desired name for new department"
+          name: 'name',
+          type: 'input',
+          message: 'Input the desired name for new department'
         },
         {
-            name: "id",
-            type: "input",
-            message: "Input id number for new department"
+            name: 'id',
+            type: 'input',
+            message: 'Input id number for new department'
         }
 
     ]).then(function(answers) {
@@ -131,19 +131,19 @@ function addRole() {
         
         inquirer.prompt([
             {
-              name: "title",
-              type: "input",
-              message: "Input title for new role."
+              name: 'title',
+              type: 'input',
+              message: 'Input title for new role.'
             },
             {
-              name: "salary",
-              type: "input",
-              message: "Input salary for role."
+              name: 'salary',
+              type: 'input',
+              message: 'Input salary for role.'
             } ,
             {
-              name: "department",
-              type: "rawlist",
-              message: "Which department does this role belong to?",
+              name: 'department',
+              type: 'rawlist',
+              message: 'Which department does this role belong to?',
               choices: selectDepartment()
             }
         ]).then(function(answers) {
