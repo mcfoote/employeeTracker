@@ -2,7 +2,7 @@ const consoleTable = require('console.table');
 const sql = require('mysql2');
 const inquirer = require('inquirer');
 
-const connection = mysql.createConnection({
+const connection = mysql2.createConnection({
 
     host: 'localhost',
     port: 3306,
@@ -121,11 +121,50 @@ function addDepartment() {
                 runEmployeeDB();
             }
         )
-    })
+    });
 
 };
 
 function addRole() {
+
+    connection.query("SELECT role.title AS Title, role.salary AS Salary FROM role LEFT JOIN department.name AS Department FROM department;",   function(err, res) {
+        
+        inquirer.prompt([
+            {
+              name: "title",
+              type: "input",
+              message: "Input title for new role."
+            },
+            {
+              name: "salary",
+              type: "input",
+              message: "Input salary for role."
+            } ,
+            {
+              name: "department",
+              type: "rawlist",
+              message: "Which department does this role belong to?",
+              choices: selectDepartment()
+            }
+        ]).then(function(answers) {
+
+            var departmentSelection = selectDepartment().indexOf(answers.choice) + 1
+            connection.query(
+                "INSERT INTO role SET ?",
+                {
+                  title: answers.title,
+                  salary: answers.salary,
+                  department_id: departmentSelection
+                },
+                function(err) {
+                    if (err) throw err
+                    console.table(answers);
+                    employeeTracker();
+                }
+            )  
+
+        });
+    });
 
 };
 
