@@ -106,6 +106,10 @@ function addEmployee() {
 
 };
 
+function updateEmployeeRole() {
+
+};
+
 function viewDepartments() {
 
 };
