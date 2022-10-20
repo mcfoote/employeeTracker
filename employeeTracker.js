@@ -96,6 +96,33 @@ function employeeTracker() {
 
 function addDepartment() {
 
+    inquirer.prompt([
+
+        {
+          name: "name",
+          type: "input",
+          message: "Input the desired name for new department"
+        },
+        {
+            name: "id",
+            type: "input",
+            message: "Input id number for new department"
+        }
+
+    ]).then(function(answers) {
+        connection.query("INSERT INTO department SET ? ",
+            {
+              name: answers.name,
+              id: answers.id
+            },
+            function(err) {
+                if (err) throw err
+                console.table(res);
+                runEmployeeDB();
+            }
+        )
+    })
+
 };
 
 function addRole() {
