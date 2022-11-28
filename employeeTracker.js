@@ -27,7 +27,7 @@ connection.connect(function(err) {
     console.log(' |______|_| |_| |_| .__/|_|\___/ \__, |\___|\___|');
     console.log(' | \\/  |         | |             __/ |          ');
     console.log(' |\\  / | __ _ _ _|_| __ _  __ _ |___/_ __       '); 
-    console.log(' | ||/| |/ _` | `_ \ / _` |/ _` |/ _ \ `__|      '); 
+    console.log(' | ||/| |/ _` | `_\\ / _` |/ _` |/ _ \ `__|      '); 
     console.log(' | |  | | (_| | | | | (_| | (_| |  __/ |         '); 
     console.log(' |_|  |_|\__,_|_| |_|\__,_|\__, |\___|_|         '); 
     console.log('                            __/ |                '); 
@@ -295,7 +295,7 @@ function viewDepartments() {
 
 function viewRoles() {
 
-    connection.query("SELECT role.id AS Dept_ID, role.title AS Title FROM role",
+    connection.query('SELECT role.id AS Dept_ID, role.title AS Title FROM role',
 
     function(err, res) {
 
