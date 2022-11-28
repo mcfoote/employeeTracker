@@ -25,9 +25,9 @@ connection.connect(function(err) {
     console.log(' |  __| | `_ ` _\\| |_\\| |/ _\\| | | |/ _ \/ _ \ '); 
     console.log(' | |____| | | | | | |_) | | (_) | |_| |  __/  __/'); 
     console.log(' |______|_| |_| |_| .__/|_|\___/ \__, |\___|\___|');
-    console.log(' |  \/  |         | |             __/ |          ');
+    console.log(' | \\/  |         | |             __/ |          ');
     console.log(' |\\  / | __ _ _ _|_| __ _  __ _ |___/_ __       '); 
-    console.log(' | |\/| |/ _` | `_ \ / _` |/ _` |/ _ \ `__|      '); 
+    console.log(' | ||/| |/ _` | `_ \ / _` |/ _` |/ _ \ `__|      '); 
     console.log(' | |  | | (_| | | | | (_| | (_| |  __/ |         '); 
     console.log(' |_|  |_|\__,_|_| |_|\__,_|\__, |\___|_|         '); 
     console.log('                            __/ |                '); 
@@ -36,7 +36,7 @@ connection.connect(function(err) {
     
     employeeTracker();
 
-})
+});
 
 function employeeTracker() {
     inquirer.prompt([
@@ -116,8 +116,12 @@ function addDepartment() {
                 id: answers.id
             },
             function(err) {
-                if (err) throw err
+                if (err){
+                  throw err; 
+                } 
+
                 console.table(res);
+
                 employeeTracker();
             }
         )
@@ -157,8 +161,12 @@ function addRole() {
                   department_id: departmentSelection
                 },
                 function(err) {
-                    if (err) throw err
+                    if (err){
+                        throw err;
+                    } 
+
                     console.table(answers);
+
                     employeeTracker();
                 }
             )  
@@ -205,8 +213,13 @@ function addEmployee() {
         role_id: roleId  
       }, 
     function(err){
-        if (err) throw err;
+
+        if (err){
+            throw err;
+        } 
+
         console.table(answers);
+
         employeeTracker();
     })
 
@@ -247,21 +260,56 @@ function updateEmployeeRole() {
                     },
         
                     function (err) {
-                        if (err)
+                        if (err){
                             throw err;
+                        }
+                            
                         console.table(answers);
+
                         employeeTracker();
                     });
             });
-        });
+    });
 
 };
 
 function viewDepartments() {
 
+    connection.query('SELECT department.id AS ID, department.name AS Department FROM department',
+   
+    function(err, res) {
+
+      if (err){
+        throw err;
+      } 
+
+      console.log('| Deparments | \n');
+
+      console.table(res);
+
+      employeeTracker();
+
+    });
+
 };
 
 function viewRoles() {
+
+    connection.query("SELECT role.id AS Dept_ID, role.title AS Title FROM role",
+
+    function(err, res) {
+
+      if (err){
+        throw err;
+      } 
+
+      console.log("| Roles | \n")
+
+      console.table(res);
+
+      employeeTracker();
+
+    })
 
 };
 
