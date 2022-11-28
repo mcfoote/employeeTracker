@@ -22,7 +22,7 @@ connection.connect(function(err) {
     console.log('  ______                 _                       ');
     console.log(' |  ____|               | |                      ');
     console.log(' | |__   _ __ ___  _ __ | | ___  _   _  ___  ___ '); 
-    console.log(' |  __| | `_ ` _ \| |_ \| |/ _ \| | | |/ _ \/ _ \ '); 
+    console.log(' |  __| | `_ ` _\\| |_\\| |/ _\\| | | |/ _ \/ _ \ '); 
     console.log(' | |____| | | | | | |_) | | (_) | |_| |  __/  __/'); 
     console.log(' |______|_| |_| |_| .__/|_|\___/ \__, |\___|\___|');
     console.log(' |  \/  |         | |             __/ |          ');
@@ -133,24 +133,24 @@ function addRole() {
             {
               name: 'title',
               type: 'input',
-              message: 'Input title for new role.'
+              message: 'Input the desired title for new role: '
             },
             {
               name: 'salary',
               type: 'input',
-              message: 'Input salary for role.'
+              message: 'Input the desired salary for this role: '
             } ,
             {
               name: 'department',
               type: 'rawlist',
-              message: 'Which department does this role belong to?',
+              message: 'Select department does this role belong to: ',
               choices: selectDepartment()
             }
         ]).then(function(answers) {
 
             var departmentSelection = selectDepartment().indexOf(answers.choice) + 1
             connection.query(
-                "INSERT INTO role SET ?",
+                'INSERT INTO role SET ?',
                 {
                   title: answers.title,
                   salary: answers.salary,
@@ -169,6 +169,48 @@ function addRole() {
 };
 
 function addEmployee() {
+
+    inquirer.prompt([
+        {
+          name: 'firstName',
+          type: 'input',
+          message: 'Input first name: '
+        },
+        {
+          name: 'lastName',
+          type: 'input',
+          message: 'Input last name: '
+        },
+        {
+          name: 'role',
+          type: 'list',
+          message: 'Select role for new employee: ',
+          choices: selectRole()
+        },
+        {
+            name: 'choice',
+            type: 'rawlist',
+            message: 'Select the manager for the new employee: ',
+            choices: selectManager()
+        }
+
+    ]).then(function (answers) {
+      var roleId = selectRole().indexOf(answers.role) + 1
+      var managerId = selectManager().indexOf(answers.choice) + 1
+      connection.query('INSERT INTO employees SET ?', 
+      {
+          first_name: answers.firstName,
+          last_name: answers.lastName,
+          manager_id: managerId,
+          role_id: roleId  
+      }, 
+      function(err){
+          if (err) throw err
+          console.table(answers)
+          runEmployeeDB()
+      })
+
+  })
 
 };
 
