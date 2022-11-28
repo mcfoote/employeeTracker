@@ -315,4 +315,19 @@ function viewRoles() {
 
 function viewEmployees() {
 
+    connection.query("SELECT employees.first_name AS First_Name, employees.last_name AS Last_Name, department.name AS Department FROM employees JOIN role ON employees.role_id = role.id JOIN department ON role.department_id = department.id ORDER BY department.id;", 
+    
+    function(err, res) {
+
+      if (err){
+        throw err;
+      } 
+
+      console.log("*** EMPLOYEES LIST BY DEPARTMENT ***")
+
+      console.table(res);
+
+      employeeTracker();
+    })
+
 };
