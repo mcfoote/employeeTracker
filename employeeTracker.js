@@ -1,6 +1,7 @@
-const consoleTable = require('console.table');
+require('console.table');
 const sql = require('mysql2');
 const { prompt } = require("inquirer");
+const logo = require("asciiart-logo");
 
 const connection = sql.createConnection({
 
@@ -18,21 +19,9 @@ connection.connect(function(err) {
 
     console.log('Successfully Connected as ' + connection.threadId);
 
-    console.log('_________________________________________________');
-    console.log('  ______                 _                       ');
-    console.log(' |  ____|               | |                      ');
-    console.log(' | |__   _ __ ___  _ __ | | ___  _   _  ___  ___ '); 
-    console.log(' |  __| | `_ ` _\\| |_\\| |/ _\\| | | |/ _ \/ _ \ '); 
-    console.log(' | |____| | | | | | |_) | | (_) | |_| |  __/  __/'); 
-    console.log(' |______|_| |_| |_| .__/|_|\___/ \__, |\___|\___|');
-    console.log(' | \\/  |         | |             __/ |          ');
-    console.log(' |\\  / | __ _ _ _|_| __ _  __ _ |___/_ __       '); 
-    console.log(' | ||/| |/ _` | `_\\ / _` |/ _` |/ _ \ `__|      '); 
-    console.log(' | |  | | (_| | | | | (_| | (_| |  __/ |         '); 
-    console.log(' |_|  |_|\__,_|_| |_|\__,_|\__, |\___|_|         '); 
-    console.log('                            __/ |                '); 
-    console.log('                           |___/                 ');
-    console.log('_________________________________________________');
+    const logoText = logo({ name: "Employee Manager" }).render();
+
+    console.log(logoText);
     
     employeeTracker();
 
