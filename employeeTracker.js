@@ -83,6 +83,60 @@ function employeeTracker() {
         })
 };
 
+                                            
+function selectRole() {
+    let roleArr = [];
+    connection.query('SELECT * FROM role', function(err, res) {
+        if (err) {
+            throw err;
+        } 
+
+        for (var i = 0; i < res.length; i++) {
+        roleArr.push(res[i].title);
+        }
+    }); 
+
+    return roleArr;
+
+};
+
+
+function selectManager() {
+
+    let managerArr = [];
+
+    connection.query('SELECT first_name, last_name FROM employee', function(err, res) {
+        if (err) {
+            throw err;
+        }
+
+        for (var i = 0; i < res.length; i++) {
+        managerArr.push(res[i].firstName);
+        }
+    });
+
+    return managerArr;
+
+};
+
+
+function selectDepartment() {
+
+    let departmentArr = [];
+
+    connection.query('SELECT * FROM department', function(err, res) {
+        if (err) {
+            throw err;
+        }
+        for (var i = 0; i < res.length; i++) {
+        departmentArr.push(res[i].name);
+        }
+    });
+
+    return departmentArr;
+
+};
+
 function addDepartment() {
 
     prompt([
