@@ -1,13 +1,13 @@
 const consoleTable = require('console.table');
 const sql = require('mysql2');
-const inquirer = require('inquirer');
+const { prompt } = require("inquirer");
 
-const connection = mysql2.createConnection({
+const connection = sql.createConnection({
 
     host: 'localhost',
     port: 3306,
     user: 'root',
-    password: '',
+    password: 'Serenity123!@',
     database: 'employee_db'
 
 });
@@ -39,13 +39,13 @@ connection.connect(function(err) {
 });
 
 function employeeTracker() {
-    inquirer.prompt([
+    prompt([
         {
         type: 'list',
         message: 'What would you like to do?',
         name: 'action',
         choices: [
-                'View All Employees', 
+                'View All employee', 
                 'Add Employee',
                 'Update Employee Role',
                 'View All Roles',
@@ -58,8 +58,8 @@ function employeeTracker() {
     ]).then(function(answers) {
             switch (answers.action) {
     
-                case 'View All Employees':
-                    viewEmployees();
+                case 'View All employee':
+                    viewemployee();
                 break;
 
                 case 'Add Employee':
@@ -96,7 +96,7 @@ function employeeTracker() {
 
 function addDepartment() {
 
-    inquirer.prompt([
+    prompt([
 
         {
             name: 'name',
@@ -133,7 +133,7 @@ function addRole() {
 
     connection.query('SELECT role.title AS Title, role.salary AS Salary FROM role LEFT JOIN department.name AS Department FROM department;',   function(err, res) {
         
-        inquirer.prompt([
+        prompt([
             {
               name: 'title',
               type: 'input',
@@ -178,7 +178,7 @@ function addRole() {
 
 function addEmployee() {
 
-    inquirer.prompt([
+    prompt([
         {
             name: 'firstName',
             type: 'input',
@@ -205,7 +205,7 @@ function addEmployee() {
     ]).then(function (answers) {
       var roleId = selectRole().indexOf(answers.role) + 1
       var managerId = selectManager().indexOf(answers.choice) + 1
-      connection.query('INSERT INTO employees SET ?', 
+      connection.query('INSERT INTO employee SET ?', 
       {
         first_name: answers.firstName,
         last_name: answers.lastName,
@@ -229,10 +229,10 @@ function addEmployee() {
 
 function updateEmployeeRole() {
 
-    connection.query('SELECT employees.last_name, role.title FROM employees JOIN role ON employees.role_id = role.id;', 
+    connection.query('SELECT employee.last_name, role.title FROM employee JOIN role ON employee.role_id = role.id;', 
     (err, res) => {
             if (err) throw err;
-            inquirer.prompt([
+            prompt([
                 {
                     name: 'lastName',
                     type: 'rawlist',
@@ -253,7 +253,7 @@ function updateEmployeeRole() {
                 },
             ]).then(function (answers) {
                 var roleId = selectRole().indexOf(answers.role) + 1;
-                connection.query('UPDATE employees SET WHERE ?',
+                connection.query('UPDATE employee SET WHERE ?',
                     {
                         last_name: answers.lastName,
                         role_id: roleId
@@ -313,9 +313,9 @@ function viewRoles() {
 
 };
 
-function viewEmployees() {
+function viewemployee() {
 
-    connection.query('SELECT employees.first_name AS First_Name, employees.last_name AS Last_Name, department.name AS Department FROM employees JOIN role ON employees.role_id = role.id JOIN department ON role.department_id = department.id ORDER BY department.id;', 
+    connection.query('SELECT employee.first_name AS First_Name, employee.last_name AS Last_Name, department.name AS Department FROM employee JOIN role ON employee.role_id = role.id JOIN department ON role.department_id = department.id ORDER BY department.id;', 
     
     function(err, res) {
 
