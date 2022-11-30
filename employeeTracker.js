@@ -85,7 +85,9 @@ function employeeTracker() {
 
                                             
 function selectRole() {
+
     let roleArr = [];
+    
     connection.query('SELECT * FROM role', function(err, res) {
         if (err) {
             throw err;
